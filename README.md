@@ -1,5 +1,3 @@
-# Hello boilerpalte
-
-```sh
-$ npm i 
-```
+npm i
+bower install
+gulp
