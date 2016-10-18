@@ -1,0 +1,31 @@
+{
+  "name": "standart",
+  "version": "7.7.7",
+  "description": "Hello world",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lenchik-ponchik/hello-boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-cssnano": "*",
+    "gulp-plumber": "*",
+    "gulp-watch": "*"
+  },
+  "dependencies": {
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-concat": "*",
+    "gulp-imagemin": "*",
+    "gulp-jade": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*"
+  }
+}

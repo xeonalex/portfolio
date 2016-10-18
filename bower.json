@@ -1,0 +1,26 @@
+{
+  "name": "start template",
+  "description": "Hello world",
+  "main": "gulpfile.js",
+  "authors": [
+    "5tka <ferol2010@yandex.ru>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "hover": "^2.0.2",
+    "960-grid-system": "*",
+    "bourbon": "^4.2.7",
+    "bPopup": "bpopup#^0.11.0",
+    "jquery": "^3.1.1",
+    "normalize-css": "^5.0.0",
+    "owl.carousel": "^2.1.6"
+  }
+}
