@@ -22,7 +22,7 @@ gulp.task('jade-templates', function() {
   return gulp.src(['./src/jade/*.jade','!./src/jade/_*.jade'])
     .pipe(plumber())
     .pipe(jade({
-       pretty: true
+       pretty: false
     }))
     .on('error', console.log)
     .pipe(gulp.dest('./build/'))
@@ -33,7 +33,7 @@ gulp.task('jade-templates', function() {
 gulp.task('sass-dev', function() {
   return gulp.src('src/sass/**/*.scss')
     .pipe(plumber())
-    // .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
     
     .pipe(sass({
       style: 'compressed',
@@ -46,7 +46,7 @@ gulp.task('sass-dev', function() {
       cascade: true
      }))
     .pipe(cssnano())
-    // .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/css/'))
     .pipe(browserSync.stream());
 });
