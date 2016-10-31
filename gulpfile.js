@@ -23,7 +23,7 @@ var gulp = require('gulp'),
 gulp.task('uncss', function() {
   return gulp.src('src/sass/css/styles.css')
     .pipe(uncss({
-      html: ['build/index.html']
+      html: ['build/*.html']
     }))
     .pipe(gulp.dest('build/css/'));
 });
@@ -44,7 +44,6 @@ gulp.task('sass-dev', function() {
   return gulp.src('src/sass/**/*.scss')
     .pipe(plumber())
     // .pipe(sourcemaps.init())
-
     .pipe(sass({
       style: 'compressed',
       errLogToConsole: true,
@@ -56,10 +55,15 @@ gulp.task('sass-dev', function() {
       cascade: true
      }))
     .pipe(shorthand())
-    .pipe(cssnano())
+    .pipe(cssnano({
+        discardComments: {
+          removeAll: true
+        }
+    }))
+    
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest('src/sass/css/'))
-    .pipe(gulp.dest('build/css/'))
+    .pipe(gulp.dest('build/css/'))    
     .pipe(browserSync.stream());
 });
 
@@ -117,8 +121,9 @@ gulp.task('default', ['jade-templates','sass-dev','img','js-vendor','js','favico
       server : './build'
     });
 
-    watch('./src/jade/**/*.jade', function() {
+    watch('./src/jade/**/*.jade', function() {    
       gulp.start('jade-templates');
+      // gulp.start('uncss');
     });
 
     watch(["./src/sass/**/*.scss",'./src/sass/_*.scss'], function() {
