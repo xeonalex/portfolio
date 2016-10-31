@@ -23,5 +23,8 @@
     "normalize-css": "latest",
     "owl.carousel": "latest",
     "bootstrap-grid-only": "latest"
+  },
+  "devDependencies": {
+    "reset-css": "latest"
   }
 }

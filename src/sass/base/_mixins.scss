@@ -1,3 +1,6 @@
+// bourbon lib
+@import "../../bower_components/bourbon/app/assets/stylesheets/_bourbon";
+
 @mixin inlineblock {
     display: inline-block;
     vertical-align: top;
