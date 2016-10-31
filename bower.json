@@ -15,13 +15,13 @@
     "tests"
   ],
   "dependencies": {
-    "hover": "^2.0.2",
-    "960-grid-system": "*",
-    "bourbon": "^4.2.7",
-    "bPopup": "bpopup#^0.11.0",
-    "jquery": "^3.1.1",
-    "normalize-css": "^5.0.0",
-    "owl.carousel": "^2.1.6",
-    "bootstrap-grid-only": "*"
+    "hover": "latest",
+    "960-grid-system": "latest",
+    "bourbon": "latest",
+    "bPopup": "bpopup#latest",
+    "jquery": "latest",
+    "normalize-css": "latest",
+    "owl.carousel": "latest",
+    "bootstrap-grid-only": "latest"
   }
 }

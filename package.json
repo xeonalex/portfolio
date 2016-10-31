@@ -1,7 +1,7 @@
 {
   "name": "standart",
   "version": "7.7.7",
-  "description": "Hello world",
+  "description": "Boilerplate",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,7 @@
   "devDependencies": {
     "gulp-cssnano": "*",
     "gulp-plumber": "*",
+    "gulp-shorthand": "^1.1.0",
     "gulp-watch": "*"
   },
   "dependencies": {

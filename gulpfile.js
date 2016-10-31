@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'), // Минификация JS
 
     plumber = require('gulp-plumber'),
+    shorthand = require('gulp-shorthand'), // шорт код
     watch = require('gulp-watch');
 
 
@@ -34,7 +35,7 @@ gulp.task('sass-dev', function() {
   return gulp.src('src/sass/**/*.scss')
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    
+
     .pipe(sass({
       style: 'compressed',
       errLogToConsole: true,
@@ -42,9 +43,10 @@ gulp.task('sass-dev', function() {
       }))
     .on('error', sass.logError)
     .pipe(autoprefixer({
-      browsers: ['last 3 versions'],
+      browsers: ['last 15 versions'],
       cascade: true
      }))
+    .pipe(shorthand())
     .pipe(cssnano())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/css/'))
