@@ -1,5 +1,5 @@
 npm i
 
-bower install
+bower i
 
 gulp
