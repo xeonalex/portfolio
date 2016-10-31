@@ -15,9 +15,18 @@ var gulp = require('gulp'),
 
     plumber = require('gulp-plumber'),
     shorthand = require('gulp-shorthand'), // шорт код
+    uncss = require('gulp-uncss'), // удаление не используемых стилей
     watch = require('gulp-watch');
 
 
+// удаление не используемых стилей  - вызывается после сборки проекта
+gulp.task('uncss', function() {
+  return gulp.src('src/sass/css/styles.css')
+    .pipe(uncss({
+      html: ['build/index.html']
+    }))
+    .pipe(gulp.dest('build/css/'));
+});
 //Собираем Jade ( html )
 gulp.task('jade-templates', function() {
   return gulp.src(['./src/jade/*.jade','!./src/jade/_*.jade'])
@@ -34,7 +43,7 @@ gulp.task('jade-templates', function() {
 gulp.task('sass-dev', function() {
   return gulp.src('src/sass/**/*.scss')
     .pipe(plumber())
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
 
     .pipe(sass({
       style: 'compressed',
@@ -48,7 +57,8 @@ gulp.task('sass-dev', function() {
      }))
     .pipe(shorthand())
     .pipe(cssnano())
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
+    .pipe(gulp.dest('src/sass/css/'))
     .pipe(gulp.dest('build/css/'))
     .pipe(browserSync.stream());
 });

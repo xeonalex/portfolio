@@ -16,6 +16,7 @@
     "gulp-cssnano": "*",
     "gulp-plumber": "*",
     "gulp-shorthand": "^1.1.0",
+    "gulp-uncss": "^1.0.6",
     "gulp-watch": "*"
   },
   "dependencies": {
