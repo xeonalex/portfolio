@@ -16,17 +16,11 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     shorthand = require('gulp-shorthand'), // шорт код
     uncss = require('gulp-uncss'), // удаление не используемых стилей
-    watch = require('gulp-watch');
-
+    watch = require('gulp-watch'),
+    rename = require('gulp-rename');
 
 // удаление не используемых стилей  - вызывается после сборки проекта
-gulp.task('uncss', function() {
-  return gulp.src('src/sass/css/styles.css')
-    .pipe(uncss({
-      html: ['build/*.html']
-    }))
-    .pipe(gulp.dest('build/css/'));
-});
+
 //Собираем Jade ( html )
 gulp.task('jade-templates', function() {
   return gulp.src(['./src/jade/*.jade','!./src/jade/_*.jade'])
@@ -62,11 +56,17 @@ gulp.task('sass-dev', function() {
     }))
     
     // .pipe(sourcemaps.write())
-    .pipe(gulp.dest('src/sass/css/'))
     .pipe(gulp.dest('build/css/'))    
     .pipe(browserSync.stream());
 });
-
+gulp.task('uncss', function() {
+  return gulp.src('build/css/styles.css')
+    .pipe(uncss({
+      html: ['build/*.html']
+    }))
+    .pipe(rename('styles.min.css'))
+    .pipe(gulp.dest('build/css/'));
+});
 //Сжатие изображений
 gulp.task('img', function() {
   return gulp.src('src/img/**/**/**')
