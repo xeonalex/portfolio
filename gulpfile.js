@@ -1,23 +1,18 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),// Склейка файлов
     browserSync  = require('browser-sync'), // BrowserSync
-    
     jade = require('gulp-jade'), // Jade обработчик html
-    
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     cssnano = require('gulp-cssnano'), //Минификация CSS
     autoprefixer = require('gulp-autoprefixer'), // Автопрефиксы CSS
-    
     imagemin = require('gulp-imagemin'),// Сжатие JPG, PNG, SVG, GIF
-    
     uglify = require('gulp-uglify'), // Минификация JS
-
     plumber = require('gulp-plumber'),
     shorthand = require('gulp-shorthand'), // шорт код
     uncss = require('gulp-uncss'), // удаление не используемых стилей
-    watch = require('gulp-watch'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    watch = require('gulp-watch');
 
 // удаление не используемых стилей  - вызывается после сборки проекта
 
@@ -54,7 +49,6 @@ gulp.task('sass-dev', function() {
           removeAll: true
         }
     }))
-    
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/css/'))    
     .pipe(browserSync.stream());
@@ -64,9 +58,10 @@ gulp.task('uncss', function() {
     .pipe(uncss({
       html: ['build/*.html']
     }))
-    .pipe(rename('styles.min.css'))
+    .pipe(rename('main.css'))
     .pipe(gulp.dest('build/css/'));
 });
+
 //Сжатие изображений
 gulp.task('img', function() {
   return gulp.src('src/img/**/**/**')
@@ -84,7 +79,6 @@ gulp.task('js', function(){
   .pipe(browserSync.stream());
 });
 
-
 //Копируем JS-vendor
 gulp.task('js-vendor', function(){
   return gulp.src('src/js/vendor/*.js')
@@ -94,7 +88,6 @@ gulp.task('js-vendor', function(){
   .pipe(gulp.dest('build/js/vendor/'))
   .pipe(browserSync.stream());
 });
-
 
 // Favicon
 gulp.task('favicon', function(){
@@ -111,8 +104,6 @@ gulp.task('fonts', function(){
   .pipe(gulp.dest('build/css/fonts/'))
   .pipe(browserSync.stream());
 });
-
-
 
 // WATCH
 gulp.task('default', ['jade-templates','sass-dev','img','js-vendor','js','favicon','fonts'], function () {
