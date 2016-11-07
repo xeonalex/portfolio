@@ -25,6 +25,7 @@
     "bootstrap-grid-only": "latest"
   },
   "devDependencies": {
-    "reset-css": "latest"
+    "reset-css": "latest",
+    "remodal": "^1.1.0"
   }
 }
