@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),// Склейка файлов
     browserSync  = require('browser-sync'), // BrowserSync
-    jade = require('gulp-jade'), // Jade обработчик html
+    pug = require('gulp-pug'), // Pug обработчик html
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     cssnano = require('gulp-cssnano'), //Минификация CSS
@@ -12,22 +12,32 @@ var gulp = require('gulp'),
     shorthand = require('gulp-shorthand'), // шорт код
     uncss = require('gulp-uncss'), // удаление не используемых стилей
     rename = require('gulp-rename'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    changed = require('gulp-changed');
 
 // удаление не используемых стилей  - вызывается после сборки проекта
 
-//Собираем Jade ( html )
-gulp.task('jade-templates', function() {
-  return gulp.src(['./src/jade/*.jade','!./src/jade/_*.jade'])
+//Собираем Pug ( html )
+gulp.task('pug-includes', function() {
+  return gulp.src(['./src/pug/*.pug','!./src/pug/_*.pug'])
     .pipe(plumber())
-    .pipe(jade({
-       pretty: false
+    .pipe(pug({
     }))
     .on('error', console.log)
     .pipe(gulp.dest('./build/'))
     .pipe(browserSync.stream());
   });
-
+//Собираем только изменившийся файл Pug ( html )
+gulp.task('pug-templates', function() {
+  return gulp.src(['./src/pug/*.pug','!./src/pug/_*.pug'])
+    .pipe(changed('./build/', {extension: '.html'}))
+    .pipe(plumber())
+    .pipe(pug({
+    }))
+    .on('error', console.log)
+    .pipe(gulp.dest('./build/'))
+    .pipe(browserSync.stream());
+  });
 // Собираем CSS из SASS файлов
 gulp.task('sass-dev', function() {
   return gulp.src('src/sass/**/*.scss')
@@ -43,14 +53,13 @@ gulp.task('sass-dev', function() {
       browsers: ['last 15 versions'],
       cascade: true
      }))
-    .pipe(shorthand())
     .pipe(cssnano({
         discardComments: {
           removeAll: true
         }
     }))
     // .pipe(sourcemaps.write())
-    .pipe(gulp.dest('build/css/'))    
+    .pipe(gulp.dest('build/css/'))
     .pipe(browserSync.stream());
 });
 gulp.task('uncss', function() {
@@ -58,6 +67,7 @@ gulp.task('uncss', function() {
     .pipe(uncss({
       html: ['build/*.html']
     }))
+    .pipe(shorthand())
     .pipe(rename('main.css'))
     .pipe(gulp.dest('build/css/'));
 });
@@ -92,6 +102,7 @@ gulp.task('js-vendor', function(){
 // Favicon
 gulp.task('favicon', function(){
   return gulp.src('src/favicon/*')
+  .pipe(changed('./build/favicon/'))
   .pipe(plumber())
   .pipe(gulp.dest('build/favicon/'))
   .pipe(browserSync.stream());
@@ -100,27 +111,31 @@ gulp.task('favicon', function(){
 // Fonts
 gulp.task('fonts', function(){
   return gulp.src('src/fonts/*')
+  .pipe(changed('./build/css/fonts/'))
   .pipe(plumber())
   .pipe(gulp.dest('build/css/fonts/'))
   .pipe(browserSync.stream());
 });
 
 // WATCH
-gulp.task('default', ['jade-templates','sass-dev','img','js-vendor','js','favicon','fonts'], function () {
-    
+gulp.task('default', ['pug-includes','sass-dev','img','js-vendor','js','favicon','fonts'], function () {
+
     browserSync.init({
       server : './build'
     });
+    watch('./src/pug/_includes/**/*.pug', function() {
+      gulp.start('pug-includes');
+    });
 
-    watch('./src/jade/**/*.jade', function() {    
-      gulp.start('jade-templates');
+    watch('./src/pug/**/*.pug', function() {
+      gulp.start('pug-templates');
       // gulp.start('uncss');
     });
 
     watch(["./src/sass/**/*.scss",'./src/sass/_*.scss'], function() {
       gulp.start('sass-dev');
     });
-    
+
     watch('./src/js/*.js', function() {
       gulp.start('js');
     });
