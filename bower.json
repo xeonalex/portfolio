@@ -26,7 +26,8 @@
   },
   "devDependencies": {
     "reset-css": "latest",
-    "remodal": "^1.1.0",
-    "neat": "^1.8.0"
+    "remodal": "latest",
+    "jeet": "^7.0.0",
+    "bxslider": "latest"
   }
 }

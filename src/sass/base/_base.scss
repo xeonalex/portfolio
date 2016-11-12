@@ -1,4 +1,4 @@
-// @import "../../../bower_components/normalize-css/normalize"; // normalize
+@import "../../../bower_components/normalize-css/normalize"; // normalize
 // @import "../../../bower_components/reset-css/_reset.scss"; // reset
 
 // @import "../../../bower_components/960-grid-system/code/css/960_12_col.css"; //960-12
@@ -6,3 +6,21 @@
 
 // @import "../../../bower_components/bootstrap-grid-only/css/grid12"; // bootstrap-grid-12
 
+// активная сетка
+// CЕТКА
+/*@import "../../../bower_components/jeet/scss/index.scss";
+
+$jeet: (
+  gutter: 2.56410256410256,
+  max-width: 1170px,
+  layout-direction: LTR,
+  parent-first: false
+);*/
+
+// блок 1170px
+.wrapper {
+
+}
+.wrapper-short {
+	@include center($max-width: map-get($jeet, 'max-width'), $pad: 15px)
+}

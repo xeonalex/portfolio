@@ -42,7 +42,7 @@ gulp.task('pug-templates', function() {
 gulp.task('sass-dev', function() {
   return gulp.src('src/sass/**/*.scss')
     .pipe(plumber())
-    // .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
       errLogToConsole: true,
@@ -58,7 +58,7 @@ gulp.task('sass-dev', function() {
           removeAll: true
         }
     }))
-    // .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/css/'))
     .pipe(browserSync.stream());
 });
