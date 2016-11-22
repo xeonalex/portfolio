@@ -28,6 +28,9 @@
     "reset-css": "latest",
     "remodal": "latest",
     "jeet": "^7.0.0",
-    "bxslider": "latest"
+    "bxslider": "latest",
+    "bxslider-4": "^4.2.5",
+    "slick": "*",
+    "jquery-mousewheel": "^3.1.13"
   }
 }

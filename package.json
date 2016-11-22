@@ -15,12 +15,14 @@
   "devDependencies": {
     "gulp-changed": "latest",
     "gulp-cssnano": "latest",
+    "gulp-group-css-media-queries": "^1.2.0",
     "gulp-plumber": "latest",
     "gulp-rename": "latest",
+    "gulp-rigger": "^0.5.8",
     "gulp-shorthand": "latest",
     "gulp-uncss": "latest",
     "gulp-watch": "latest",
-    "gulp-changed": "latest"
+    "gulp-zip": "^3.2.0"
   },
   "dependencies": {
     "browser-sync": "latest",
